@@ -1,0 +1,48 @@
+author: Daniel Kasprowski
+build_pdf: true
+build_zip: true
+code: MATH2049
+format_version: 2
+institution: University of Southampton
+license: null
+locale: en
+mathjax_url: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+num_pdf_runs: 1
+root_url: /{base}/{code}/
+structure:
+- build_pdf: false
+  content: []
+  formats:
+  - filetype: html
+    format: default
+    url: index.html
+  is_hidden: false
+  slug: introduction
+  source: .
+  title: Introduction
+  type: introduction
+  url: index.html
+- build_pdf: true
+  content: []
+  formats:
+  - filetype: html
+    format: default
+    url: math2049_geometry_an/index.html
+  - filetype: pdf
+    format: default
+    url: math2049_geometry_an/pdf/math2049_2024.pdf
+  is_hidden: false
+  pdf_url: math2049_geometry_an/pdf/math2049_2024.pdf
+  slug: math2049_geometry_an
+  source: MATH2049_2024.tex
+  splitlevel: -2
+  title: MATH2049 - Geometry and Topology
+  type: document
+  url: math2049_geometry_an/index.html
+themes:
+- path: .
+  source: default
+  title: Default
+title: Geometry and Topology
+year: '2024'
+zipfile: geometry_and_topolog.zip
