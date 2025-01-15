@@ -1,3 +1,9 @@
+(() => {
+const body_refs = {};
+const plastex_labels = document.getElementById('plastex-labels');
+if(plastex_labels) {
+    Object.assign(body_refs, JSON.parse(plastex_labels.textContent));
+}
 window.MathJax = {
     tex: {
         macros: {
@@ -6,8 +12,7 @@ window.MathJax = {
             euro: '\\unicode{x20AC}',
             bm: ["\\boldsymbol{ #1 }",1],
             lefteqn: ["\\rlap{ #1 }\\quad",1],
-            qedhere: "\\tag*{$\\blacksquare$}",
-            pause: ''
+            qedhere: "\\tag*{$\\blacksquare$}"
         },
         inlineMath: [['\\(','\\)']],
         autoload: {},
@@ -23,7 +28,17 @@ window.MathJax = {
             packages: {'[+]': ['bbox']}
         },
         tagformat: {
-            url: (id, base) => id
+            url: (id, base) => {
+                /** 
+                 * Format the URL for a reference in math mode.
+                 * If it's in `body_refs`, strip off MathJax's `mjx-eqn:` prefix.
+                 */
+                const stripped_id = id.replace(/^mjx-eqn:/,'');
+                if(body_refs[stripped_id]) {
+                    id = '#' + stripped_id;
+                }
+                return id;
+            }
         }
     },
     startup: {
@@ -34,11 +49,6 @@ window.MathJax = {
             const Label = MathJax._.input.tex.Tags.Label;
             const BaseMethods = MathJax._.input.tex.base.BaseMethods.default;
 
-            const body_refs = {};
-            const plastex_labels = document.getElementById('plastex-labels');
-            if(plastex_labels) {
-                Object.assign(body_refs, JSON.parse(plastex_labels.textContent));
-            }
             new CommandMap('chirun-eqref', {
                 ref:     ['HandleRef', false],
                 eqref: ['HandleRef', true]
@@ -51,6 +61,8 @@ window.MathJax = {
                     const ref = parser.tags.allLabels[label] || parser.tags.labels[label];
 
                     if (!ref && parser.tags.refUpdate) {
+                        /** When there is a reference in math mode to a label defined in text mode, fill it in from `body_refs`.
+                         */
                         if(body_refs[label]) {
                             const {ref, url} = body_refs[label];
                             parser.tags.labels[label] = new Label(ref, url);
@@ -99,3 +111,4 @@ window.MathJax = {
         ]
     }
 };
+})();

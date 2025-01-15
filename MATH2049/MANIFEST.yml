@@ -30,11 +30,11 @@ structure:
     url: math2049_geometry_an/index.html
   - filetype: pdf
     format: default
-    url: math2049_geometry_an/pdf/math2049_2024.pdf
+    url: math2049_geometry_an/pdf/math2049_2025.pdf
   is_hidden: false
-  pdf_url: math2049_geometry_an/pdf/math2049_2024.pdf
+  pdf_url: math2049_geometry_an/pdf/math2049_2025.pdf
   slug: math2049_geometry_an
-  source: MATH2049_2024.tex
+  source: MATH2049_2025.tex
   splitlevel: -2
   title: MATH2049 - Geometry and Topology
   type: document
@@ -44,5 +44,5 @@ themes:
   source: default
   title: Default
 title: Geometry and Topology
-year: '2024'
+year: '2025'
 zipfile: geometry_and_topolog.zip
